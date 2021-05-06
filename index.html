@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Bar 💯</title>
+    <style>
+      .d-flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0 48px;
+      }
+      .border-bar {
+        position: relative;
+        border: 2px solid black;
+        border-radius: 4px;
+        width: 100%;
+        height: 48px;
+      }
+      .bar {
+        background-color: black;
+        width: 0;
+        height: 100%;
+      }
+      .btn {
+        border-radius: 4px;
+        padding: 0.8rem 3rem;
+        margin-top: 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: #fff;
+        cursor: pointer;
+      }
+      #percents {
+        margin-left: 8px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        color: red;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="d-flex-center">
+      <div class="border-bar">
+        <div class="bar">
+          <span id="percents">0%</span>
+        </div>
+        <button class="btn">Upload!</button>
+      </div>
+    </div>
+    <script>
+      const percents = document.getElementById("percents");
+      const innerBar = document.querySelector(".bar");
+      const uploadBtn = document.querySelector(".btn");
+      let width = 0;
+      const uploadBar = function () {
+        width += 1;
+        innerBar.style.width = `${width}%`;
+        if (width >= 0 && width <= 100) {
+          setTimeout(uploadBar, 50);
+          percents.textContent = `${width}%`;
+        } else {
+          innerBar.style.width = "100%";
+          percents.textContent = "Complete!";
+          width = 0;
+        }
+      };
+
+      uploadBtn.addEventListener("click", uploadBar);
+    </script>
+  </body>
+</html>
